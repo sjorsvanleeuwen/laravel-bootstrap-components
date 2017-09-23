@@ -1,0 +1,30 @@
+{
+    "name": "sjorsvanleeuwen/laravel-bootstrap-components",
+    "description": "Laravel components for Laravel Collective Html/Form.",
+    "keywords": ["laravel", "collective", "components", "form", "html"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sjors van Leeuwen",
+            "email": "sjorsvanleeuwen@gmail.com"
+        }
+    ],
+    "require": {
+        "laravelcollective/html": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sjorsvanleeuwen\\BootstrapComponents\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Sjorsvanleeuwen\\BootstrapComponents\\ServiceProvider"
+            ]
+        }
+    }
+}
