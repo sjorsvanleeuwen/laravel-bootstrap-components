@@ -1,0 +1,20 @@
+@mixin shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+@mixin track {
+  cursor: pointer;
+  height: $track-height;
+  transition: all .2s ease;
+  width: $track-width;
+}
+
+@mixin thumb {
+  @include shadow($carousel-text-shadow);
+  background: $thumb-color;
+  border: $thumb-border-width solid $thumb-border-color;
+  border-radius: $thumb-radius;
+  cursor: pointer;
+  height: $thumb-height;
+  width: $thumb-width;
+}

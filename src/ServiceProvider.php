@@ -3,6 +3,7 @@
 namespace Sjorsvanleeuwen\BootstrapComponents;
 
 use Form;
+use Html;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -15,15 +16,21 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->defineResources();
 
-        $this->defineComponents();
+        $this->defineFormComponents();
+        $this->defineHtmlComponents();
     }
 
-    public function defineComponents()
+    public function defineFormComponents()
     {
         Form::component('bsInputText', 'bc::form.text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component('bsInputSelect', 'bc::form.select', ['name', 'label' => null, 'options' => [], 'value' => null, 'attributes' => [], 'optionAttributes' => []]);
         Form::component('bsInputRange', 'bc::form.range', ['name', 'label' => null, 'min' => 0, 'max' => 100, 'value' => null, 'attributes' => []]);
         Form::component('bsFormActionButtons', 'bc::form.action_buttons', ['cancelUrl']);
+    }
+
+    public function defineHtmlComponents()
+    {
+        Html::component('bsActionLink', 'bc::html.action_link', ['url', 'title', 'type', 'show_title' => true, 'show_icon' => true, 'attributes' => []]);
     }
 
     /**

@@ -1,2 +1,6 @@
+/** General stuff **/
+@import "variables";
+@import "mixins";
+
 /** Components **/
-@import "_inputrange";
+@import "inputrange";
