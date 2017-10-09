@@ -1,36 +1,60 @@
 @php
-$route = Route::getCurrentRoute()->getName();
-$breadcrumbs = [];
-array_push($breadcrumbs, [
-    'name' => substr($route, 0, strpos($route, '.')),
-    'route' => $route,
-    'action' => substr($route, strpos($route, '.') + 1)
-]);
-if(substr($route, strpos($route, '.') + 1) != 'index')
-{
-    array_unshift($breadcrumbs, [
-        'name' => substr($route, 0, strpos($route, '.')),
-        'route' => substr($route, 0, strpos($route, '.')) . '.index',
-        'action' => 'index'
-    ]);
-}
+    $route = Route::getCurrentRoute()->getName();
+    $routeParts = explode('.', $route);
+    $showBreadcrumb = count($routeParts) > 1;
+    $routeParams = Route::getCurrentRoute()->parameters();
+
+    $breadcrumbs = [];
+    if($showBreadcrumb)
+    {
+        do {
+            $objectType = $routeParts[count($routeParts) - 2];
+            $param = \Illuminate\Support\Arr::get($routeParams, $objectType);
+            $action = array_last($routeParts);
+            $title = trans_choice($objectType . '.title', 2);
+
+            if($action == 'create' || $action == 'edit' || $action == 'delete')
+            {
+                $title = trans('bc::form' . $action, ['type' => trans_choice($objectType . '.title', 1)]);
+            }
+            else if($action == 'show')
+            {
+                $title = $param->name;
+            }
+            array_unshift($breadcrumbs, [
+                'route' => $route,
+                'title' => $title,
+                'params' => $routeParams
+            ]);
+
+            array_pop($routeParts);
+            unset($routeParams[$objectType]);
+
+            if($action != 'index')
+            {
+                if(count($routeParts) > 1)
+                {
+                    array_pop($routeParts);
+                    array_push($routeParts, 'show');
+                }
+                else
+                {
+                    array_push($routeParts, 'index');
+                }
+                $route = implode('.', $routeParts);
+            }
+        }
+        while(count($routeParts) > 1);
+    }
 @endphp
+@if($showBreadcrumb)
 <ol class="breadcrumb pull-right">
     @foreach($breadcrumbs as $breadcrumb)
-        @php
-            if($breadcrumb['action'] != 'index')
-            {
-                $breadcrumb['title'] = trans('general.form.' . $breadcrumb['action'], ['type' => trans_choice($breadcrumb['name'] . '.title', 1)]);
-            }
-            else
-            {
-                $breadcrumb['title'] = trans_choice($breadcrumb['name'] . '.title', 2);
-            }
-        @endphp
         @if($loop->last)
             <li class="active">{{ $breadcrumb['title'] }}</li>
         @else
-            <li><a href="{{ route($breadcrumb['route']) }}">{{ $breadcrumb['title'] }}</a></li>
+            <li><a href="{{ route($breadcrumb['route'], $breadcrumb['params']) }}">{{ $breadcrumb['title'] }}</a></li>
         @endif
     @endforeach
 </ol>
+@endif

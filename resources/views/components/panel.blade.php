@@ -1,13 +1,16 @@
 @php
-    $panelType = $panelType ? $panelType : 'default';
+    $panelType = isset($panelType) ? $panelType : 'default';
+    $includeBreadcrumb = isset($includeBreadcrumb) ? $includeBreadcrumb : true;
 @endphp
 <div class="panel panel-{{ $panelType }}">
     @isset($title)
         <div class="panel-heading">
             <h2>
                 {{ $title }}
-                @component('bc::components.breadcrumb')
-                @endcomponent
+                @if($includeBreadcrumb)
+                    @component('bc::components.breadcrumb')
+                    @endcomponent
+                @endif
             </h2>
         </div>
     @endisset

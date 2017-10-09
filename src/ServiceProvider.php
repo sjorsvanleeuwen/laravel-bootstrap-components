@@ -23,8 +23,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function defineFormComponents()
     {
         Form::component('bsInputText', 'bc::form.text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component('bsInputEmail', 'bc::form.email', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component('bsInputCheckbox', 'bc::form.checkbox', ['name', 'label' => null, 'value' => 1, 'checked' => null, 'attributes' => []]);
+        Form::component('bsInputPassword', 'bc::form.password', ['name', 'label' => null, 'attributes' => []]);
         Form::component('bsInputSelect', 'bc::form.select', ['name', 'label' => null, 'options' => [], 'value' => null, 'attributes' => [], 'optionAttributes' => []]);
         Form::component('bsInputRange', 'bc::form.range', ['name', 'label' => null, 'min' => 0, 'max' => 100, 'value' => null, 'attributes' => []]);
+        Form::component('bsInputStatic', 'bc::form.static', ['label', 'value']);
         Form::component('bsFormActionButtons', 'bc::form.action_buttons', ['cancelUrl']);
     }
 
@@ -98,5 +102,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         {
             define('BC_PATH', realpath(__DIR__.'/../'));
         }
+
+        $this->app->extend('html', function($html, $app) {
+            return new HtmlBuilder($app['url'], $app['view']);
+        });
     }
 }

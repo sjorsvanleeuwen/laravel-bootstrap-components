@@ -1,6 +1,4 @@
 @php
-    $value = Form::getValueAttribute($name, $value);
-    $value = is_numeric($value) ? $value : round($max / 2);
     $form_group_classes = [
         'form-group'
     ];
@@ -11,8 +9,7 @@
 @endphp
 <div class="{{ implode(' ', $form_group_classes) }}">
     {{ Form::label($name, $label) }}
-    <output name="output_{{ $name }}">{{ $value }}</output>
-    {{ Form::input('range', $name, $value, array_merge_recursive(['class' => 'form-control', 'min' => $min, 'max' => $max, 'oninput' => 'output_' . $name . '.value = ' . $name . '.value'], $attributes)) }}
+    {{ Form::email($name, $value, array_merge_recursive(['class' => 'form-control'], $attributes)) }}
     @if($errors->has($name))
         @foreach($errors->get($name) as $message)
             <p class="help-block">{{ $message }}</p>

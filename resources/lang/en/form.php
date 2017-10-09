@@ -5,6 +5,8 @@ return [
     'add_success' => ':type was successfully added',
     'edit' => 'Edit :type',
     'edit_success' => ':type was successfully updated',
+    'copy' => 'Copy :type',
+    'copy_success' => ':type was successfully copied',
     'delete' => 'Delete :type',
     'delete_success' => ':type was successfully deleted',
     'save' => 'Save',
@@ -14,5 +16,7 @@ return [
         'success' => 'Success',
         'error' => 'Failure'
     ],
-    'select_empty_first' => 'Please select'
+    'select_empty_first' => 'Please select',
+    'general_title' => 'General',
+    'search' => 'Search'
 ];

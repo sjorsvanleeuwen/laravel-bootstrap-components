@@ -9,7 +9,7 @@
 @endphp
 <div class="{{ implode(' ', $form_group_classes) }}">
     {{ Form::label($name, $label) }}
-    {{ Form::text($name, $value, array_merge(['class' => 'form-control'], $attributes)) }}
+    {{ Form::text($name, $value, array_merge_recursive(['class' => 'form-control'], $attributes)) }}
     @if($errors->has($name))
         @foreach($errors->get($name) as $message)
             <p class="help-block">{{ $message }}</p>
