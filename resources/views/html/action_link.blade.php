@@ -9,7 +9,7 @@
     ];
     $linkTitle = '';
     $title = trans('bc::form.' . $type, ['type' => $title]);
-    $icon = '<span class="glyphicon glyphicon-' . (is_null($icon) ? $iconMap[$type] : $icon) . '"></span>';
+    $icon = '<span class="glyphicon glyphicon-' . $iconMap[$type] . '"></span>';
     $linkBuilder = [];
     if($show_icon)
     {

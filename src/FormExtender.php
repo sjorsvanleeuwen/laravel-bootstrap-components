@@ -22,6 +22,18 @@ class FormExtender
     /**
      * @param string $name
      * @param string|null $label
+     * @param array $attributes
+     *
+     * @return string
+     */
+    public function bsInputFile($name, $label = null, $attributes = [])
+    {
+        return Form::bsInputFile($name, $label, $attributes);
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $label
      * @param mixed $value
      * @param array $attributes
      *

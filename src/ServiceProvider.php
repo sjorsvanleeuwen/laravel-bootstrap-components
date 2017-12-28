@@ -23,6 +23,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function defineFormComponents()
     {
         Form::component('bsInputText', 'bc::form.text', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
+        Form::component('bsInputFile', 'bc::form.file', ['name', 'label' => null, 'attributes' => []]);
         Form::component('bsInputEmail', 'bc::form.email', ['name', 'label' => null, 'value' => null, 'attributes' => []]);
         Form::component('bsInputCheckbox', 'bc::form.checkbox', ['name', 'label' => null, 'value' => 1, 'checked' => null, 'attributes' => []]);
         Form::component('bsInputPassword', 'bc::form.password', ['name', 'label' => null, 'attributes' => []]);
